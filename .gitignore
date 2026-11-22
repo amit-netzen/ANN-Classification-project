@@ -3,6 +3,7 @@ venv/
 .venv/
 __pycache__/
 *.py[cod]
+*.pkl
 
 # Editor and OS files
 .vscode/
