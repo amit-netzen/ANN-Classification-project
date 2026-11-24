@@ -1,0 +1,20 @@
+{
+  "selection_metric": "validation ROC AUC",
+  "validation_auc": 0.8545713424682617,
+  "best_parameters": {
+    "units": 64,
+    "layers": 2,
+    "dropout": 0.2,
+    "learning_rate": 0.001,
+    "batch_size": 64
+  },
+  "test_metrics_at_threshold_0.5": {
+    "roc_auc": 0.8586861129234011,
+    "accuracy": 0.863,
+    "precision": 0.7955555555555556,
+    "recall": 0.4398034398034398,
+    "f1": 0.5664556962025317
+  },
+  "seed": 42,
+  "trials": 8
+}

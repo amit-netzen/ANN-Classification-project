@@ -21,6 +21,28 @@ python -m pip install ipykernel
 
 Open `experiments.ipynb` in Jupyter or VS Code, select this virtual environment as the notebook kernel, and run the cells from top to bottom. The CSV file should remain in the project directory so the notebook can load it by its relative path.
 
+## Run the Streamlit app
+
+After training the model and generating the encoder and scaler files, start the prediction app from the project directory using the same Python environment that has the project dependencies:
+
+```powershell
+venv\python.exe -m streamlit run app.py
+```
+
+The app opens a customer profile form in the sidebar and displays the estimated churn probability and a likely/unlikely classification. It uses `churn_model.h5`, `label_encoder.pkl`, `onehot_encoder.pkl`, and `scaler.pkl` from the project directory.
+
+## Tune the model
+
+Run the reproducible eight-trial hyperparameter search with the project environment:
+
+```powershell
+venv\python.exe tune_model.py
+```
+
+The search samples network width and depth, dropout, learning rate, and batch size. It selects the model by validation ROC AUC with early stopping, evaluates the selected model once on a stratified held-out test set, then saves the app-ready model and preprocessing artifacts. Trial metrics are written to `tuning_results.csv`; the selected settings and test metrics are in `tuning_summary.json`.
+
+Latest run: the selected network has two 64-unit hidden layers, 0.2 dropout, a 0.001 learning rate, and batch size 64. It achieved validation ROC AUC 0.8546 and held-out test ROC AUC 0.8587, with test accuracy 0.8630, precision 0.7956, recall 0.4398, and F1 0.5665 at a 0.5 probability threshold.
+
 ## Workflow
 
 The notebook:
